@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Catalog</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="top-page">
+      <header class="page-header">
+        <div class="page-header__menu">
+          <form class="page-header__menu-form">
+            <div class="wrapper">
+              <input type="text" value="" id="name-to-find" class="search__field" placeholder="Поиск товаров"  autofocus>
+              <button type="submit" class="button button--search">Search</button>
+            </div>
+            <button type="button" class="button button--add-new">Add New</button>
+          </form>
+        </div>
+      </header>
+    </div>
+    <div class="page-wrapper">
+    	<section class="catalog">
+        <h1 class="hidden">Таблица продуктов</h1>
+    		<header class="catalog__header">
+    			<ul class="catalog__captions">
+    				<li class="catalog__caption catalog__caption--name">
+              <h2 class="catalog__name">Name</h2>
+              <a href="#" class="catalog__arrow-name"></a>
+            </li>
+    				<li class="catalog__caption catalog__caption--price">
+              <h2 class="catalog__price">Price</h2>
+              <a href="#" class="catalog__arrow-price catalog__arrow-increase-price"></a>
+              <a href="#" class="catalog__arrow-price catalog__arrow-decrease-price hidden"></a>
+            </li>
+    				<li class="catalog__caption catalog__caption--actions">
+              <h2 class="catalog__actions">Actions</h2>
+            </li>
+    			</ul>
+    		</header>
+    	</section>
+      <section class="add-update">
+        <form action="/echo" method="post" class="add-update__form">
+          <div class="add-update__wrapper">
+            <label for="name" class="add-update__name">Name: <p class="add-update__description">*Required field</p></label>
+            <label for="count" class="add-update__count">Count:</label>
+            <label for="price" class="add-update__price">Price:</label>
+          </div>
+          <div class="add-update__wrapper-input">
+            <input type="text" id="name" class="add-update__name-field" maxlength="15">
+            <input type="number" id="count" min="0" class="add-update__count-field">
+            <input type="number" id="price" min="0" step="0.01" class="add-update__price-field"> 
+            <input type="submit" id="add" value="Add" class="button button--add" >
+          </div>
+        </form>
+        <p class="error-message">Заполните поле Name</p>
+      </section>
+    </div>
+    <div class="confirmation">
+      <div class="confirmation__wrapper">
+        <h2 class="confirmation__title">Are you sure?</h2>
+        <p class="confirmation__description">Are you sure you want to perform this action?</p>
+        <button type="button" class="button button__consent">Yes</button>
+        <button type="button" class="button button__cancel">No</button>
+      </div>
+    </div>
+    <script src="js/script.min.js"></script>
+  </body>
+ </html>
