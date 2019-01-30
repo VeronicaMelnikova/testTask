@@ -1,11 +1,13 @@
 'use strict';
 
+var ESC_KEYCODE = 27;
 var MAX_LENGTH = 15;
 var catalog = document.querySelector('.catalog');
 var addField = document.querySelector('.add-update');
 var addForm = document.querySelector('.add-update__form');
 var openAddField = document.querySelector('.button--add-new');
 var buttonAddProduct = addForm.querySelector('.button--add');
+var buttonCloseAddForm = addForm.querySelector('.button--close');
 var search = document.querySelector('.button--search');
 var nameField = addForm.querySelector('.add-update__name-field');
 var countField = addForm.querySelector('.add-update__count-field');
@@ -20,19 +22,19 @@ var priceValue;
 
 var productsData = [
   {
-  	name: 'Монитор',
-  	count: 5,
-  	price: '$12,352.25',
+    name: 'Монитор',
+    count: 5,
+    price: '$12,352.25',
   },
   {
-  	name: 'Клавиатура',
-  	count: 5,
-  	price: '$12,351.25'
+    name: 'Клавиатура',
+    count: 5,
+    price: '$12,351.25'
   },
   {
-  	name: 'Мышка',
-  	count: 5,
-  	price: '$12,350.25'
+    name: 'Мышка',
+    count: 5,
+    price: '$12,350.25'
   }
 ];
 
@@ -73,8 +75,8 @@ var createProduct = function(product, number) {
 
 var renderProducts = function (startElement) {
   for (var i = startElement; i < productsData.length; i++) {
-	var product = createProduct(productsData[i], i);
-	catalog.appendChild(product);
+  var product = createProduct(productsData[i], i);
+  catalog.appendChild(product);
   };
 };
 
@@ -109,9 +111,24 @@ openAddField.addEventListener('click', function (evt) {
   buttonAddProduct.value = 'Add';
 });
 
+var onAddFieldKeyPress = function (evt) {
+  var active = document.activeElement;
+  if (evt.keyCode === ESC_KEYCODE) {
+    if (active !== addForm) {
+      closeAddField();
+    }
+  }
+};
+
 var closeAddField = function() {
   addField.classList.remove('add-update--show');
+  document.removeEventListener('keydown', onAddFieldKeyPress);
+  addForm.reset();
 };
+
+buttonCloseAddForm.addEventListener('click', function (evt) {
+  closeAddField();
+})
 
 var hideUnsuitableProductbyName = function(name) {
   var allProducts = catalog.querySelectorAll('.catalog__product');
@@ -239,6 +256,11 @@ var deleteProducts = function (startProduct, endProduct) {
     catalog.removeChild(allProducts[i]);
   };
 };
+
+/*var deleteProducts = function () {
+  var allProducts = catalog.querySelectorAll('.catalog__product');
+  catalog.removeChild(allProducts[i]);
+};*/
 
 nameField.addEventListener('mouseup', function () {
   nameField.classList.remove('error');
